@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    title Lundi Matin Test
+    meta name="viewport" content="width=device-width,initial-scale=1"
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = javascript_importmap_tags
+
+  body
+    .header
+      = link_to "Rechercher un contact", clients_path
+
+    .container
+      - if notice.present?
+        .alert.alert-notice = notice
+      - if alert.present?
+        .alert.alert-alert = alert
+
+      = yield

@@ -1,0 +1,14 @@
+.card style="max-width: 400px; margin: 3rem auto;"
+  h2.search-title style="text-align: center;" Connexion
+
+  = form_with url: login_path, method: :post, local: true do |f|
+    .form-group
+      = f.label :username, "Nom d'utilisateur"
+      = f.text_field :username, placeholder: "Votre nom d'utilisateur", required: true, value: "test_api"
+
+    .form-group
+      = f.label :password, "Mot de passe"
+      = f.password_field :password, placeholder: "Votre mot de passe", required: true, value: "api123456"
+
+    .form-group
+      = f.submit "Se connecter", class: "btn btn-primary", style: "width: 100%;"

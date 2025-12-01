@@ -1,0 +1,47 @@
+.card
+  .title
+    | Recherche d'une fiche de contact
+
+.card.search_form
+  = form_with url: clients_path, method: :get, local: true do |f|
+    .form-group
+      = f.label :nom, "Renseigner un nom ou une dénomination"
+      = f.text_field :nom, placeholder: "Nom ou dénomination", value: params[:nom]
+    = f.submit "Rechercher", class: "btn btn-primary", name: "search"
+
+table
+  colgroup
+    col style="width: 60px;"
+    col style="width: 200px;"
+    col style="width: 300px;"
+    col style="width: 150px;"
+    col style="width: 150px;"
+    col style="width: 100px;"
+  thead
+    tr
+      th
+      th Nom
+      th Adresse
+      th Ville
+      th Téléphone
+      th
+  tbody
+    - if @clients.any?
+      - @clients.each do |client|
+        tr
+          td
+            .client-name
+              .avatar
+                = client['nom'].to_s.split[0, 2].map { |w| w[0].upcase }.join
+          td = client['nom']
+          td = client['adresse']
+          td = client['ville']
+          td = client['tel']
+          td
+            = link_to client_path(client['id']), class: "btn btn-secondary" do
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20"><path fill="#ffffff" d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33l-1.42 1.42l-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/></svg>
+              | Voir
+
+    - else
+      tr
+        td [colspan="6"] Aucun contact trouvé.
